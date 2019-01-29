@@ -1,4 +1,4 @@
-.SideDrawer{
+.SideDrawer {
   position: fixed;
   width: 280px;
   max-width: 70%;
@@ -13,7 +13,7 @@
 }
 
 @media (min-width: 500px) {
-  .SideDrawer{
+  .SideDrawer {
     display: none;
   }
 }
@@ -27,8 +27,8 @@
 }
 
 .Logo {
-  margin-bottom: 32px;
   height: 11%;
+  margin-bottom: 32px;
 }
 
 
