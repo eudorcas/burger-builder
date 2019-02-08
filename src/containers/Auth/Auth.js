@@ -4,6 +4,7 @@ import {Redirect} from 'react-router-dom';
 import Input from '../../components/UI/Input/Input';
 import Button from '../../components/UI/Button/Button';
 import Spinner from '../../components/UI/Spinner/Spinner';
+import {updateObject} from "../../shared/utility";
 
 import * as actions from '../../store/actions/index';
 
@@ -44,8 +45,8 @@ class Auth extends Component {
         isSignup: true
     };
 
-    componentDidMount () {
-        if (!this.props.buildingBurger && this.props.authRedirectPath!=="/") {
+    componentDidMount() {
+        if (!this.props.buildingBurger && this.props.authRedirectPath !== "/") {
             this.props.onSetAuthRedirectPath();
         }
     }
@@ -69,15 +70,13 @@ class Auth extends Component {
     };
 
     inputChangeHandler = (event, controlName) => {
-        const updatedControls = {
-            ...this.state.controls,
-            [controlName]: {
-                ...this.state.controls[controlName],
+        const updatedControls = updateObject(this.state.controls, {
+            [controlName]: updateObject(this.state.control[controlName], {
                 value: event.target.value,
                 valid: this.checkValidity(event.target.value, this.state.controls[controlName].validation),
                 touched: true
-            }
-        };
+            })
+        });
         this.setState({controls: updatedControls});
     };
 
@@ -133,7 +132,7 @@ class Auth extends Component {
         let authRedirect = null;
 
         if (this.props.isAuthenticated) {
-            authRedirect = <Redirect to={this.props.authRedirectPath} />;
+            authRedirect = <Redirect to={this.props.authRedirectPath}/>;
         }
 
         return (
