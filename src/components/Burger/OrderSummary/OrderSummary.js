@@ -3,9 +3,6 @@ import Button from '../../UI/Button/Button';
 
 class OrderSummary extends Component {
     //This should be a functional component, left only for debugging purposes
-    componentWillUpdate(){
-        console.log("OrderSummary willUpdate");
-    }
     render() {
         const ingredientSummary = Object.keys(this.props.ingredients)
             .map(igKey => {
