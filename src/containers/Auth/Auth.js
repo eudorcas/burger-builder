@@ -1,7 +1,8 @@
 import React, {Component} from 'react';
+import {connect} from 'react-redux';
+import {Redirect} from 'react-router-dom';
 import Input from '../../components/UI/Input/Input';
 import Button from '../../components/UI/Button/Button';
-import {connect} from 'react-redux';
 import Spinner from '../../components/UI/Spinner/Spinner';
 
 import * as actions from '../../store/actions/index';
@@ -46,14 +47,14 @@ class Auth extends Component {
     checkValidity = (value, rules) => {
         let isValid = true;
         if (rules.required) {
-            isValid = value.trim() !=='' && isValid;
+            isValid = value.trim() !== '' && isValid;
         }
 
-        if(rules.minLength) {
+        if (rules.minLength) {
             isValid = value.length >= rules.minLength && isValid;
         }
 
-        if(rules.maxLength) {
+        if (rules.maxLength) {
             isValid = value.length <= rules.maxLength && isValid;
         }
 
@@ -108,11 +109,11 @@ class Auth extends Component {
                     shouldValidate={el.config.validation}
                     touched={el.config.touched}
                     changed={(e) => this.inputChangeHandler(e, el.id)}/>
-                )
+            )
         });
 
-        if(this.props.loading) {
-            form = <Spinner />
+        if (this.props.loading) {
+            form = <Spinner/>
         }
 
         let errorMsg = null;
@@ -122,8 +123,16 @@ class Auth extends Component {
                 <p>{this.props.error.message}</p>
             )
         }
+
+        let authRedirect = null;
+
+        if (this.props.isAuthenticated) {
+            authRedirect = <Redirect to={"/"} />;
+        }
+
         return (
             <div className={classes.Auth}>
+                {authRedirect}
                 {errorMsg}
                 <form onSubmit={this.submitHandler}>
                     {form}
@@ -142,7 +151,8 @@ class Auth extends Component {
 const mapStateToProps = state => {
     return {
         loading: state.auth.loading,
-        error: state.auth.error
+        error: state.auth.error,
+        isAuthenticated: state.auth.token !== null
     }
 };
 
