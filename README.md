@@ -1,6 +1,6 @@
 ### burger-builder
 
-Burger Builder - fully responsive web app in React&Redux made during the "React - The Complete Guide" Udemy course with Maximilian Schwarzmüller.
+Burger Builder - fully responsive web app built with React&Redux, made during the "React - The Complete Guide" Udemy course with Maximilian Schwarzmüller.
 
 ##### Used technologies:
 - React
